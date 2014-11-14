@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Get script directory
+script_dir=$(dirname $0)
+
+# Call plantuml
+java -jar $script_dir/plantuml.jar $*
