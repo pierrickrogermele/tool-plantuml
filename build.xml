@@ -1,0 +1,37 @@
+<!-- vi: se ft=ant : -->
+<project name="plantuml" default="all">
+
+	<dirname property="plantuml.dir" file="${ant.file.plantuml}"/>
+
+	<!--~~~~~~~~~~~~~~
+	~ PLANTUML MACRO ~
+	~~~~~~~~~~~~~~~-->
+
+	<macrodef name="plantuml">
+		<attribute name="input"/>
+		<attribute name="outputdir" default=""/>
+		<attribute name="type" default="png"/>
+
+		<sequential>
+
+			<!-- Set argument values -->
+			<condition property="plantuml.outputdir" value="" else="-o @{outputdir}"><equals arg1="@{outputdir}" arg2=""/></condition>
+
+			<!-- Run command -->
+			<exec executable="${plantuml.dir}/plantuml" failonerror="true">
+				<arg line="${plantuml.outputdir}"/>
+				<arg value="-t@{type}"/>
+				<arg value="@{input}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<!--~~~~~~~~~~~~~
+	~ EMPTY TARGETS ~
+	~~~~~~~~~~~~~~-->
+
+	<target name="all"/>
+	<target name="clean"/>
+	<target name="test"/>
+
+</project>
